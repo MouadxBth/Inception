@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    restart: always
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    restart: always
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    restart: always
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    restart: always
+  ftp_server:
+    container_name: ftp_server
+    build: ./requirements/bonus/ftp_server
+    restart: always
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    restart: always
+  static_page:
+    container_name: static_page
+    build: ./requirements/bonus/static_page
+    restart: always
+
+volumes:
+  mariadb_volume:
+  wordpress_volume:
