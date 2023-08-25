@@ -18,4 +18,6 @@ RUN openssl req -x509 -nodes \
 
 COPY conf/default /etc/nginx/sites-enabled/default
 
+EXPOSE 3306
+
 CMD [ "nginx", "-g", "daemon off;"]

@@ -10,6 +10,11 @@ y
 y
 _EOF_
 
+if [ ! -d "/run/mysqld" ]; then
+	mkdir -p /run/mysqld
+	chown -R mysql:mysql /run/mysqld
+fi
+
 # Create SQL script
 cat << _EOF_ > /tmp/db.sql
 CREATE DATABASE IF NOT EXISTS ${WORDPRESS_DB_NAME};
