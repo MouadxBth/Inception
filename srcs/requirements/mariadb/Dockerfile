@@ -1,6 +1,9 @@
 FROM debian:bullseye
 
-RUN apt-get update
-RUN apt-get install -y mariadb-server mariadb-client
+RUN apt update -y && apt upgrade -y
+RUN apt install -y mariadb-server
 
-CMD [ "echo", "NGINX Image has been enabled!"]
+COPY conf/mysqld.conf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/wordpress_db_setup.sh /
+
+CMD [ "bash", "/wordpress_db_setup.sh"]

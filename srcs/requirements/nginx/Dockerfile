@@ -1,6 +1,21 @@
 FROM debian:bullseye
 
-RUN apt-get update
-RUN apt-get install -y openssl nginx
+RUN apt update -y && apt upgrade -y
+RUN apt install -y openssl nginx
 
-CMD [ "echo", "NGINX Image has been enabled!"]
+RUN mkdir -p /etc/nginx/ssl
+
+RUN mkdir -p /var/www/wordpress
+
+RUN chmod 755 /var/www/wordpress
+
+RUN chown -R www-data:www-data /var/www/wordpress
+
+RUN openssl req -x509 -nodes \
+    -out /etc/nginx/ssl/inception.crt \
+    -keyout /etc/nginx/ssl/inception.key \
+    -subj "/C=MA/ST=Casablanca/L=Settat/O=42/OU=42/CN=mbouthai.42.fr/UID=mbouthai"
+
+COPY conf/default /etc/nginx/sites-enabled/default
+
+CMD [ "nginx", "-g", "daemon off;"]
