@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/etc/init.d/mariadb start
+
 mysql_secure_installation << _EOF_
 $MARIADB_ROOT_PASSWORD
 n
