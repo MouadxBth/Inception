@@ -20,6 +20,8 @@ GRANT ALL PRIVILEGES ON ${WORDPRESS_DB_NAME}.* TO '${WORDPRESS_DB_USER}'@'%';
 FLUSH PRIVILEGES;
 _EOF_
 
+mariadb < /tmp/db.sql
+
 mysqladmin -u root -p$MARIADB_ROOT_PASSWORD shutdown
 
 exec mysqld_safe
