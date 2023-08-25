@@ -12,7 +12,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress_volume:/var/www/html
+      - wordpress_volume:/var/www/wordpress
     depends_on:
       - wordpress
     networks:
@@ -45,7 +45,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - wordpress_volume:/var/www/html
+      - wordpress_volume:/var/www/wordpress
     depends_on:
       - mariadb
     networks:
