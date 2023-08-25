@@ -11,4 +11,4 @@ RUN chmod +x /usr/local/bin/wp
 
 WORKDIR /var/www/wordpress
 
-CMD [ "bash", "/wordpress_db_setup"]
+CMD [ "bash", "/wordpress_db_setup.sh"]

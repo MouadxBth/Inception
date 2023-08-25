@@ -16,3 +16,9 @@ wp core install --allow-root --url=${DOMAIN_NAME} \
     --skip-email
 
 wp user create --allow-root ${WP_USER} ${WP_EMAIL} --user_pass=${WP_USER_PASSWORD} --role=author
+
+sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf 
+
+mkdir /run/php
+
+exec php-fpm7.4 -F
