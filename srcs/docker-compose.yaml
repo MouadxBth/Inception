@@ -56,7 +56,7 @@ volumes:
   mariadb_volume:
     driver: local
     driver_opts:
-      device: /home/mbouthai/data/mysql
+      device: /home/mbouthai/data/mariadb
       type: none
       o: bind
       
