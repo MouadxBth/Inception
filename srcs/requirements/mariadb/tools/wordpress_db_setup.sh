@@ -10,9 +10,9 @@ y
 y
 _EOF_
 
-if [ ! -d "/run/mysqld" ]; then
-	mkdir -p /run/mysqld
-	chown -R mysql:mysql /run/mysqld
+if [ ! -d "/var/run/mysqld" ]; then
+	mkdir -p /var/run/mysqld
+	chown -R mysql:mysql /var/run/mysqld
 fi
 
 # Create SQL script
