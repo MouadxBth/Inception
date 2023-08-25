@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt update -y && apt upgrade -y
+RUN apt update
 RUN apt install -y mariadb-server
 
 RUN mkdir -p /var/run/mysqld \

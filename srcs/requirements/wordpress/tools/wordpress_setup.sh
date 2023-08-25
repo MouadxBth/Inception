@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -d "/home/${USER}/data" ]; then
+        mkdir -p ~/data/mariadb && mkdir ~/data/wordpress
+fi
+
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 chmod +x /usr/local/bin/wp
@@ -26,9 +30,26 @@ wp user create --allow-root ${WORDPRESS_USER} ${WORDPRESS_USER_EMAIL} \
     --user_pass=${WORDPRESS_USER_PASSWORD} \
     --role=author
 
-sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf 
+sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
+
+sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
+
+sed -i "s|;listen.owner = nobody|listen.owner = nobody|g" /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
+
+sed -i "s|;listen.group = nobody|listen.group = nobody|g" /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
 
 mkdir /run/php
 
-exec php-fpm7.4 -F
+chmod -R 0777 wp-content/
+
+#wp config set WP_REDIS_HOST redis --allow-root
+#wp config set WP_REDIS_PORT 6379 --raw --allow-root
+#wp config set WP_CACHE_KEY_SALT $DOMAIN_NAME --allow-root
+#wp config set WP_REDIS_PASSWORD $REDIS_PASSWORD --allow-root
+#wp config set WP_REDIS_CLIENT phpredis --allow-root
+#wp plugin install redis-cache --activate --allow-root
+#wp plugin update --all --allow-root
+#wp redis enable --allow-root
+
+exec php-fpm8.2 -F
 

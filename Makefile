@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/08/25 02:51:18 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/08/25 06:33:37 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,23 +14,41 @@ COMPOSE_FILE := ./srcs/docker-compose.yaml
 COMPOSE_CMD := docker compose -f
 HOME_DATA_DIR	:= /home/mbouthai/data
 
+name = inception
+
 all:
+	@printf "Launch configuration ${name}...\n"
+	@mkdir -p $(HOME_DATA_DIR)/wordpress
+	@mkdir -p $(HOME_DATA_DIR)/mariadb
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d
+
+build:
+	@printf "Building configuration ${name}...\n"
 	@mkdir -p $(HOME_DATA_DIR)/wordpress
 	@mkdir -p $(HOME_DATA_DIR)/mariadb
 	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d --build
 
 down:
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) down -v
+	@printf "Stopping configuration ${name}...\n"
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) down
 
-stop:
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) stop
+re: down
+	@printf "Rebuild configuration ${name}...\n"
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d --build
 
 clean: down
-	rm -rf $(HOME_DATA_DIR)/wordpress/*
-	rm -rf $(HOME_DATA_DIR)/mariadb/*
+	@printf "Cleaning configuration ${name}...\n"
+	@docker system prune -a
+	@sudo rm -rf $(HOME_DATA_DIR)/wordpress/*
+	@sudo rm -rf $(HOME_DATA_DIR)/mariadb/*
+
+fclean:
+	@printf "Total clean of all configurations docker\n"
 	@docker stop $$(docker ps -qa)
-	@docker rm $$(docker ps -qa)
+	@docker system prune --all --force --volumes
+	@docker network prune --force
+	@docker volume prune --force
+	@sudo rm -rf $(HOME_DATA_DIR)/wordpress/*
+	@sudo rm -rf $(HOME_DATA_DIR)/mariadb/*
 
-re: clean all
-
-.PHONY: all re down clean
+.PHONY	: all build down re clean fclean
