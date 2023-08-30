@@ -1,13 +1,10 @@
 FROM debian:bullseye
 
-RUN add-apt-repository ppa:ondrej/php &&\
-    apt update -y && \
-    apt install -y lsb-release \
-        gnupg2 \
-        ca-certificates \
-        apt-transport-https \
-        software-properties-common \
-        php${PHP_VERSION} \
+RUN apt update -y && \
+    apt install -y curl \
+    php \
+    php-fpm \
+    php-mysql \
         php${PHP_VERSION}-fpm \
         php${PHP_VERSION}-mysql \
         php${PHP_VERSION}-redis &&\
