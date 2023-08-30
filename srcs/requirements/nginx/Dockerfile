@@ -1,15 +1,13 @@
 FROM debian:bullseye
 
-RUN apt update -y && apt upgrade -y
-RUN apt install -y openssl nginx
+RUN apt update -y && \
+    apt install -y openssl nginx &&\
+    apt autoremove && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /etc/nginx/ssl
-
-RUN mkdir -p /var/www/wordpress
-
-RUN chmod 755 /var/www/wordpress
-
-RUN chown -R www-data:www-data /var/www/wordpress
+RUN mkdir -p /etc/nginx/ssl /var/www/wordpress \
+    && chmod 755 /var/www/wordpress \
+    && chown -R www-data:www-data /var/www/wordpress
 
 RUN openssl req -x509 -nodes \
     -out /etc/nginx/ssl/inception.crt \

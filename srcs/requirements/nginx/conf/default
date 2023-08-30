@@ -23,7 +23,7 @@ server {
             try_files $uri $uri/ =404;
         }
 
-        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        # pass the PHP scripts to FastCGI server listening on wordpress:9000
         #
         location ~ \.php$ {
             include snippets/fastcgi-php.conf;

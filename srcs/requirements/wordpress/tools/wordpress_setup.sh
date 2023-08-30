@@ -30,7 +30,7 @@ wp user create --allow-root ${WORDPRESS_USER} ${WORDPRESS_USER_EMAIL} \
     --user_pass=${WORDPRESS_USER_PASSWORD} \
     --role=author
 
-sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
+sed -i "s|listen = \/run\/php\/php${PHP_VERSION}-fpm.sock|listen = 9000|g" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
 sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
 
@@ -42,14 +42,14 @@ mkdir /run/php
 
 chmod -R 0777 wp-content/
 
-#wp config set WP_REDIS_HOST redis --allow-root
-#wp config set WP_REDIS_PORT 6379 --raw --allow-root
+#wp config set WP_REDIS_HOST $REDIS_HOST --allow-root
+#wp config set WP_REDIS_PORT $REDIS_PORT --raw --allow-root
 #wp config set WP_CACHE_KEY_SALT $DOMAIN_NAME --allow-root
 #wp config set WP_REDIS_PASSWORD $REDIS_PASSWORD --allow-root
-#wp config set WP_REDIS_CLIENT phpredis --allow-root
+#wp config set WP_REDIS_CLIENT $REDIS_CLIENT --allow-root
 #wp plugin install redis-cache --activate --allow-root
 #wp plugin update --all --allow-root
 #wp redis enable --allow-root
 
-exec php-fpm8.2 -F
+exec php-fpm${PHP_VERSION} -F
 

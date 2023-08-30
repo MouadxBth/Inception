@@ -1,7 +1,9 @@
 FROM debian:bullseye
 
-RUN apt update
-RUN apt install -y mariadb-server
+RUN apt update && \
+    apt install -y mariadb-server && \
+    apt autoremove && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/run/mysqld \
     && chown -R mysql:mysql /var/run/mysqld \
