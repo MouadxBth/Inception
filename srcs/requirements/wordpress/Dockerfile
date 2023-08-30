@@ -5,6 +5,7 @@ RUN apt update -y && \
     php \
     php-fpm \
     php-mysql \
+    mariadb-client \
         php${PHP_VERSION}-fpm \
         php${PHP_VERSION}-mysql \
         php${PHP_VERSION}-redis &&\
