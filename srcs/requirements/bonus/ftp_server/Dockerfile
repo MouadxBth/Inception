@@ -17,6 +17,5 @@ RUN echo "ftpmbouthai:123456" | /usr/sbin/chpasswd && \
 
 WORKDIR /var/www/wordpress
 
-EXPOSE 21
 
 CMD [ "/usr/sbin/vsftpd", "/etc/vsftpd.conf" ]

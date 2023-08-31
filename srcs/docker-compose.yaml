@@ -67,6 +67,8 @@ services:
       - .env
     expose:
       - 21
+    ports:
+      - "21:21"
     volumes:
       - wordpress_volume:/var/www/wordpress
     networks:
