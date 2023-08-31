@@ -4,9 +4,9 @@ RUN apt update -y && \
     apt install -y vsftpd
 
 RUN mkdir -p /var/www/wordpress
-RUN adduser --system --home /var/www/wordpress --shell /bin/false --ingroup root --no-create-home ${FTP_USER}
+RUN adduser --system --home /var/www/wordpress --shell /bin/false --ingroup root --no-create-home ftpmbouthai
 
-RUN echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd && \
+RUN echo "ftpmbouthai:123456" | /usr/sbin/chpasswd && \
     sed -i "s|#chroot_local_user=YES|chroot_local_user=YES|g" /etc/vsftpd/vsftpd.conf && \
     sed -i "s|#local_enable=YES|local_enable=YES|g" /etc/vsftpd/vsftpd.conf && \
     sed -i "s|#write_enable=YES|write_enable=YES|g" /etc/vsftpd/vsftpd.conf && \
