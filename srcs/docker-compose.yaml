@@ -56,6 +56,22 @@ services:
     networks:
       - inception
 
+  ftp_server:
+    build:
+      context: ./requirements/bonus/ftp_server
+      dockerfile: Dockerfile
+    image: ftp_server
+    container_name: ftp_server
+    restart: always
+    env_file:
+      - .env
+    expose:
+      - 21
+    volumes:
+      - wordpress_volume:/var/www/wordpress
+    networks:
+      - inception
+
 volumes:
   mariadb_volume:
     driver: local

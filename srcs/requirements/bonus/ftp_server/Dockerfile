@@ -3,8 +3,8 @@ FROM debian:bullseye
 RUN apt update -y && \
     apt install -y vsftpd
 
-RUN mkdir -p /var/www && \
-    adduser --system --home /var/www --shell /bin/false --ingroup root --no-create-home ${FTP_USER} && \
+RUN mkdir -p /var/www/wordpress && \
+    adduser --system --home /var/www/wordpress --shell /bin/false --ingroup root --no-create-home ${FTP_USER} && \
     echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd && \
     sed -i "s|#chroot_local_user=YES|chroot_local_user=YES|g" /etc/vsftpd/vsftpd.conf && \
     sed -i "s|#local_enable=YES|local_enable=YES|g" /etc/vsftpd/vsftpd.conf && \
@@ -14,7 +14,7 @@ RUN mkdir -p /var/www && \
     echo "seccomp_sandbox=NO" >> /etc/vsftpd/vsftpd.conf && \
     echo "pasv_enable=YES" >> /etc/vsftpd/vsftpd.conf
 
-WORKDIR /var/www
+WORKDIR /var/www/wordpress
 
 EXPOSE 21
 
