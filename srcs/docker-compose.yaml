@@ -40,7 +40,7 @@ services:
 
   wordpress:
     build:
-      conext: ./requirements/wordpress
+      context: ./requirements/wordpress
       dockerfile: Dockerfile
     image: wordpress
     container_name: wordpress
