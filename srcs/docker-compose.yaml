@@ -2,8 +2,11 @@ version: '3'
 
 services:
   nginx:
+    build: 
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    image: nginx
     container_name: nginx
-    build: ./requirements/nginx/.
     restart: always
     env_file:
       - .env
@@ -17,8 +20,11 @@ services:
       - inception
     
   mariadb:
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    image: mariadb
     container_name: mariadb
-    build: ./requirements/mariadb/.
     restart: always
     env_file:
       - .env
@@ -31,8 +37,11 @@ services:
     init: true
 
   wordpress:
+    build:
+      conext: ./requirements/wordpress
+      dockerfile: Dockerfile
+    image: wordpress
     container_name: wordpress
-    build: ./requirements/wordpress/.
     restart: always
     env_file:
       - .env
