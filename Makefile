@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/08/30 20:54:15 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/08/31 11:43:47 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,39 +16,35 @@ HOME_DATA_DIR	:= /home/mbouthai/data
 
 name = inception
 
-all:
-	@printf "Launch configuration ${name}...\n"
-	@mkdir -p $(HOME_DATA_DIR)/wordpress
-	@mkdir -p $(HOME_DATA_DIR)/mariadb
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d
-
-build:
-	@printf "Building configuration ${name}...\n"
-	@mkdir -p $(HOME_DATA_DIR)/wordpress
-	@mkdir -p $(HOME_DATA_DIR)/mariadb
+all: create_directories
+	@echo "Building and running docker images...\n"
 	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d --build
 
 down:
-	@printf "Stopping configuration ${name}...\n"
+	@echo "Stopping docker containers...\n"
 	@$(COMPOSE_CMD) $(COMPOSE_FILE) down
 
-re: down
-	@printf "Rebuild configuration ${name}...\n"
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d --build
-
 clean: down
-	@printf "Cleaning configuration ${name}...\n"
+	@echo "Deleting docker containers...\n"
 	@docker system prune -a
-	@sudo rm -rf $(HOME_DATA_DIR)/wordpress/*
-	@sudo rm -rf $(HOME_DATA_DIR)/mariadb/*
 
-fclean:
-	@printf "Total clean of all configurations docker\n"
+fclean: delete_directories
+	@echo "Deleting containers, images, networks and volumes...\n"
 	@docker stop $$(docker ps -qa)
 	@docker system prune --all --force --volumes
 	@docker network prune --force
 	@docker volume prune --force
-	@sudo rm -rf $(HOME_DATA_DIR)/wordpress/*
-	@sudo rm -rf $(HOME_DATA_DIR)/mariadb/*
+
+create_directories:
+	@echo "Creating data directories..."
+	@mkdir -p $(HOME_DATA_DIR)/wordpress
+	@mkdir -p $(HOME_DATA_DIR)/mariadb
+
+delete_directories:
+	@echo "Deleting data directories..."
+	@rm -rf $(HOME_DATA_DIR)/wordpress/*
+	@rm -rf $(HOME_DATA_DIR)/mariadb/*
+
+re: down all
 
 .PHONY	: all build down re clean fclean

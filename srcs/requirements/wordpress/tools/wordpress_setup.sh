@@ -1,9 +1,5 @@
 #!/bin/bash
 
-if [ ! -d "/home/${USER}/data" ]; then
-        mkdir -p ~/data/mariadb && mkdir ~/data/wordpress
-fi
-
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 chmod +x /usr/local/bin/wp
