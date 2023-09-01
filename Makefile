@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/09/01 14:34:47 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/09/01 14:42:12 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ clean: down
 
 fclean: delete_directories
 	@echo "Deleting containers, images, networks and volumes...\n"
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) --rmi all -v
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) down --rmi all -v
 
 create_directories:
 	@echo "Creating data directories..."

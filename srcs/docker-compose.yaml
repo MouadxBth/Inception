@@ -17,8 +17,7 @@ services:
     volumes:
       - wordpress_volume:/var/www/wordpress
     depends_on:
-      wordpress:
-        condition: service_healthy
+      - wordpress
     networks:
       - inception
     
