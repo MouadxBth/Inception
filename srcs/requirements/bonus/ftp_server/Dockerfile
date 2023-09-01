@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 RUN apt update -y && \
-    apt install -y vsftpd \
+    apt install -y vsftpd && \
     apt autoremove && \
     rm -rf /var/lib/apt/lists/*
 
