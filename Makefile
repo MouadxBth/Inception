@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/09/01 14:42:12 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/09/01 14:58:10 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,6 @@ delete_directories:
 	@rm -rf $(HOME_DATA_DIR)/wordpress/*
 	@rm -rf $(HOME_DATA_DIR)/mariadb/*
 
-re: down all
+re: fclean all
 
 .PHONY	: all build down re clean fclean
