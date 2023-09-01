@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/09/01 12:29:15 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/09/01 14:34:47 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,23 +20,13 @@ all: create_directories
 	@echo "Building and running docker images...\n"
 	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d --build
 
-down:
-	@echo "Stopping docker containers...\n"
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) down
-
-test_clean:
-	@docker-compose down --rmi all -v
-
 clean: down
 	@echo "Deleting docker containers...\n"
-	@docker system prune -a
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) down
 
 fclean: delete_directories
 	@echo "Deleting containers, images, networks and volumes...\n"
-	@docker stop $$(docker ps -qa)
-	@docker system prune --all --force --volumes
-	@docker network prune --force
-	@docker volume prune --force
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) --rmi all -v
 
 create_directories:
 	@echo "Creating data directories..."

@@ -84,6 +84,7 @@ services:
 
 volumes:
   mariadb_volume:
+    name: mariadb_volume
     driver: local
     driver_opts:
       device: /home/mbouthai/data/mariadb
@@ -91,6 +92,7 @@ volumes:
       o: bind
       
   wordpress_volume:
+    name: wordpress_volume
     driver: local
     driver_opts:
       device: /home/mbouthai/data/wordpress
