@@ -12,15 +12,6 @@ RUN adduser --system \
     --no-create-home \
     ftpmbouthai
 
-RUN chmod -R 750 /var/www/wordpress && \
-    chown -R ftpmbouthai:ftpmbouthai  /var/www/wordpress && \
-    echo "ftpmbouthai" >> /etc/vsftpd.userlist && \
-    echo "ftpmbouthai:123456" | /usr/sbin/chpasswd && \
-    echo "write_enable=YES" >> /etc/vsftpd.conf && \
-    echo "chroot_local_user=YES" >> /etc/vsftpd.conf && \
-    echo "allow_writeable_chroot=YES" >> /etc/vsftpd.conf && \
-    echo "userlist_enable=YES" >> /etc/vsftpd.conf && \
-    echo "userlist_file=/etc/vsftpd.userlist" >> /etc/vsftpd.conf && \
-    echo "userlist_deny=NO" >> /etc/vsftpd.conf
+COPY ./tools/ftp_server_setup.sh ./ftp_server_setup.sh 
 
-CMD [ "/usr/sbin/vsftpd", "/etc/vsftpd.conf" ]
+CMD [ "sh", "./ftp_server_setup.sh" ]
