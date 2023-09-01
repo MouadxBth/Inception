@@ -60,9 +60,6 @@ services:
         condition: service_healthy
     networks:
       - inception
-    healthcheck:
-      test: netstat -an | grep 9000 > /dev/null; if [ $$? != 0 ]; then exit 1; fi;
-      start_period: 10s
 
   ftp_server:
     build:
