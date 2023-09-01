@@ -20,4 +20,8 @@ echo "userlist_file=/etc/vsftpd.userlist" >> /etc/vsftpd.conf
 
 echo "userlist_deny=NO" >> /etc/vsftpd.conf
 
+service vsftpd start
+
+service vsftpd stop
+
 exec "/usr/sbin/vsftpd" "/etc/vsftpd.conf"
