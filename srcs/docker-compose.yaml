@@ -5,7 +5,7 @@ services:
     build: 
       context: ./requirements/nginx
       dockerfile: Dockerfile
-    image: nginx
+    image: nginx:${TAG}
     container_name: nginx
     restart: always
     env_file:
@@ -17,7 +17,8 @@ services:
     volumes:
       - wordpress_volume:/var/www/wordpress
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_healthy
     networks:
       - inception
     
@@ -25,7 +26,7 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    image: mariadb
+    image: mariadb:${TAG}
     container_name: mariadb
     restart: always
     env_file:
@@ -37,12 +38,15 @@ services:
     networks:
       - inception
     init: true
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      start_period: 20s
 
   wordpress:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-    image: wordpress
+    image: wordpress:${TAG}
     container_name: wordpress
     restart: always
     env_file:
@@ -52,15 +56,19 @@ services:
     volumes:
       - wordpress_volume:/var/www/wordpress
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     networks:
       - inception
+    healthcheck:
+      test: netstat -an | grep 9000 > /dev/null; if [ $$? != 0 ]; then exit 1; fi;
+      start_period: 10s
 
   ftp_server:
     build:
       context: ./requirements/bonus/ftp_server
       dockerfile: Dockerfile
-    image: ftp_server
+    image: ftp_server:${TAG}
     container_name: ftp_server
     restart: always
     env_file:

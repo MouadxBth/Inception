@@ -47,5 +47,5 @@ chmod -R 0777 wp-content/
 #wp plugin update --all --allow-root
 #wp redis enable --allow-root
 
-exec php-fpm${PHP_VERSION} -F --no-daemonize
+exec php-fpm${PHP_VERSION} -F
 

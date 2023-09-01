@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/08/31 11:43:47 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/09/01 12:29:15 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ all: create_directories
 down:
 	@echo "Stopping docker containers...\n"
 	@$(COMPOSE_CMD) $(COMPOSE_FILE) down
+
+test_clean:
+	@docker-compose down --rmi all -v
 
 clean: down
 	@echo "Deleting docker containers...\n"
