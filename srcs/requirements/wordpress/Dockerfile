@@ -1,5 +1,7 @@
 FROM debian:bullseye
 
+RUn echo "PHP VERSION: ${PHP_VERSION}"
+
 RUN apt update -y && \
     apt install -y curl \
     mariadb-client \
