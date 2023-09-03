@@ -78,6 +78,24 @@ services:
     networks:
       - inception
 
+  alpino:
+    build:
+      context: ./requirements/alpine
+      dockerfile: Dockerfile
+    image: alpino:${TAG}
+    container_name: alpino
+    restart: always
+    env_file:
+      - .env
+    expose:
+      - 21
+    ports:
+      - "21:21"
+    volumes:
+      - wordpress_volume:/var/www/wordpress
+    networks:
+      - inception
+
 
 volumes:
   mariadb_volume:
