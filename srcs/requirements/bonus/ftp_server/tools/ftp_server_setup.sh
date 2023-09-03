@@ -2,11 +2,9 @@
 
 chmod -R 750 /var/www/wordpress 
 
-chown -R ftpmbouthai:ftpmbouthai  /var/www/wordpress 
+chown -R ${FTP_USER}:${FTP_USER}  /var/www/wordpress 
 
-echo "ftpmbouthai" >> /etc/vsftpd.userlist 
-
-echo "ftpmbouthai:123456" | /usr/sbin/chpasswd 
+echo ${FTP_USER} >> /etc/vsftpd.userlist 
 
 echo "write_enable=YES" >> /etc/vsftpd.conf 
 
