@@ -68,7 +68,7 @@ services:
     container_name: ftp_server
     restart: always
     env_file:
-      - .env
+      - ../.env
     expose:
       - 21
     ports:
