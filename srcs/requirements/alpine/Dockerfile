@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM debian:bullseye
 
 COPY ./tools/test.sh ./test.sh
 
