@@ -1,5 +1,7 @@
 FROM debian:bullseye
 
+RUN echo "${FTP_USER} ${FTP_PASSWORD}"
+
 RUN apt update -y && \
     apt install -y vsftpd && \
     apt autoremove && \
