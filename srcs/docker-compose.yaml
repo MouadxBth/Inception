@@ -83,6 +83,7 @@ services:
       - wordpress_volume:/var/www/wordpress
     networks:
       - inception
+    init: true
 
 
 volumes:
