@@ -69,10 +69,6 @@ services:
     restart: always
     env_file:
       - .env
-    expose:
-      - 21
-    ports:
-      - "21:21"
     volumes:
       - wordpress_volume:/var/www/wordpress
     networks:
@@ -87,10 +83,6 @@ services:
     restart: always
     env_file:
       - .env
-    expose:
-      - 21
-    ports:
-      - "21:21"
     volumes:
       - wordpress_volume:/var/www/wordpress
     networks:
