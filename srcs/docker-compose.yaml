@@ -60,15 +60,15 @@ services:
     networks:
       - inception
 
-  ftp_server:
+  alpine:
     build:
-      context: ./requirements/bonus/ftp_server
+      context: ./requirements/bonus/alpine
       dockerfile: Dockerfile
-    image: ftp_server:${TAG}
-    container_name: ftp_server
+    image: alpiner:${TAG}
+    container_name: alpiner
     restart: always
     env_file:
-      - ../.env
+      - .env
     expose:
       - 21
     ports:
@@ -77,6 +77,7 @@ services:
       - wordpress_volume:/var/www/wordpress
     networks:
       - inception
+
 
 volumes:
   mariadb_volume:
