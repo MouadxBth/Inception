@@ -1,5 +1,9 @@
 #!/bin/sh
 
+adduser --system --home /var/www/wordpress --shell /bin/false --ingroup root --no-create-home ${FTP_USER}
+
+echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd 
+
 chmod -R 750 /var/www/wordpress 
 
 chown -R ${FTP_USER}:${FTP_USER}  /var/www/wordpress 
