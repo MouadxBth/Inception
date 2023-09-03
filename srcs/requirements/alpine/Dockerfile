@@ -1,7 +1,5 @@
 FROM alpine:3.16
 
-ENV FTP_USER=$FTP_USER
+COPY ./tools/test.sh ./test.sh
 
-RUN echo "The value of FTP_USER is $FTP_USER"
-
-CMD ["echo", "${FTP_USER}", " ", "${FTP_PASSWORD}"]
+CMD ["sh", "test.sh"]
