@@ -37,9 +37,6 @@ services:
     networks:
       - inception
     init: true
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "--silent"]
-      start_period: 20s
 
   wordpress:
     build:
@@ -55,8 +52,7 @@ services:
     volumes:
       - wordpress_volume:/var/www/wordpress
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - mariadb
     networks:
       - inception
 
