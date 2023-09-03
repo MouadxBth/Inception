@@ -8,11 +8,7 @@ RUN apt update -y && \
     rm -rf /var/lib/apt/lists/*
 
 
-RUN adduser --system \
-    --home /var/www/wordpress \
-    --shell /bin/false \
-    --ingroup root \
-    --no-create-home ${FTP_USER}
+RUN adduser --system --home /var/www/wordpress --shell /bin/false --ingroup root --no-create-home ${FTP_USER}
 
 RUN echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd 
 
