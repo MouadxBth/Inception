@@ -45,16 +45,15 @@ mkdir /run/php
 
 chmod -R 0777 wp-content/
 
-#wp config set WP_REDIS_HOST $REDIS_HOST --allow-root
-#wp config set WP_REDIS_PORT $REDIS_PORT --raw --allow-root
-#wp config set WP_CACHE_KEY_SALT $DOMAIN_NAME --allow-root
-#wp config set WP_REDIS_PASSWORD $REDIS_PASSWORD --allow-root
-#wp config set WP_REDIS_CLIENT $REDIS_CLIENT --allow-root
-#wp plugin install redis-cache --activate --allow-root
-#wp plugin update --all --allow-root
-#wp redis enable --allow-root
+wp config set WP_REDIS_HOST $REDIS_HOST --allow-root
+wp config set WP_REDIS_PORT $REDIS_PORT --raw --allow-root
+wp config set WP_CACHE_KEY_SALT $DOMAIN_NAME --allow-root
+wp config set WP_REDIS_PASSWORD $REDIS_PASSWORD --allow-root
+wp config set WP_REDIS_CLIENT $REDIS_CLIENT --allow-root
 
-export
+wp plugin install redis-cache --activate --allow-root
+wp plugin update --all --allow-root
+wp redis enable --allow-root
 
 exec php-fpm${PHP_VERSION} -F
 
