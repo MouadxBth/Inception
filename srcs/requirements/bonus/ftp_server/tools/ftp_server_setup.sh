@@ -1,6 +1,11 @@
 #!/bin/sh
 
-adduser --system --home /var/www/wordpress --shell /bin/false --ingroup root --no-create-home ${FTP_USER}
+adduser --system \
+    --home /var/www/wordpress \
+    --shell /usr/sbin/nologin \
+    --ingroup root \
+    --no-create-home \
+    ${FTP_USER}
 
 echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd 
 

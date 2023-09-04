@@ -36,8 +36,7 @@ services:
       - mariadb_volume:/var/lib/mysql
     networks:
       - inception
-    init: true
-
+      
   wordpress:
     build:
       context: ./requirements/wordpress

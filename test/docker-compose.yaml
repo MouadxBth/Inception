@@ -1,9 +1,0 @@
-version: "3"
-
-services:
-  alpine:
-    build:
-      context: ./alpine
-      dockerfile: Dockerfile
-    image: alpiner
-    

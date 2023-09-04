@@ -1,6 +1,11 @@
 #!/bin/bash
 
-echo "PHP VERSION: ${PHP_VERSION}"
+apt install -y php${PHP_VERSION} \
+    php${PHP_VERSION}-fpm \
+    php${PHP_VERSION}-mysql \
+    php${PHP_VERSION}-redis
+
+apt autoremove && rm -rf /var/lib/apt/lists/*
 
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
