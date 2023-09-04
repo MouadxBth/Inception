@@ -9,6 +9,8 @@ adduser --system \
 
 echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd 
 
+echo "account sufficient pam_permit.so" >> /etc/pam.d/vsftpd
+
 chmod -R 750 /var/www/wordpress 
 
 chown -R ${FTP_USER}:${FTP_USER}  /var/www/wordpress 
