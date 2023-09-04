@@ -38,14 +38,6 @@ echo "pasv_min_port=40100" >> /etc/vsftpd.conf
 
 echo "pasv_max_port=40200" >> /etc/vsftpd.conf
 
-echo "debug_enable=YES" >> /etc/vsftpd.conf
-
-echo "dual_log_enable=YES" >> /etc/vsftpd.conf
-
-echo "syslog_enable=YES" >> /etc/vsftpd.conf
-echo "log_ftp_protocol=YES" >> /etc/vsftpd.conf 
-echo "xferlog_enable=YES" >> /etc/vsftpd.conf
-
 service vsftpd start
 
 service vsftpd stop
