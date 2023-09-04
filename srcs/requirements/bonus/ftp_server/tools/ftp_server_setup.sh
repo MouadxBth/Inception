@@ -1,7 +1,6 @@
 #!/bin/sh
 
 adduser --home /var/www/wordpress \
-    --shell /usr/sbin/nologin \
     --ingroup root \
     --no-create-home \
     ${FTP_USER}
