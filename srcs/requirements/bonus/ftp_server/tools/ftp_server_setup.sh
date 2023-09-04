@@ -1,6 +1,7 @@
 #!/bin/sh
 
-adduser --home /var/www/wordpress \
+adduser --system \
+    --home /var/www/wordpress \
     --no-create-home \
     ${FTP_USER}
 
