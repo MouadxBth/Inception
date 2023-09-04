@@ -2,6 +2,8 @@
 
 echo /usr/sbin/nologin >> /etc/shells
 
+chmod -R 755 /var/www && chmod -R 755 /var/www/wordpress 
+
 adduser --system \
     --home /var/www/wordpress \
     --shell /usr/sbin/nologin \
@@ -9,7 +11,6 @@ adduser --system \
     --no-create-home \
     ${FTP_USER}
 
-chmod -R 755 /var/www && chmod -R 755 /var/www/wordpress 
 
 echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd 
 
