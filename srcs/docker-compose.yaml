@@ -67,7 +67,8 @@ services:
       expose:
         - 21
       ports:
-        - ["21:21", "40100-40200:40100-40200"]
+        - "21:21"
+        - "40100-40200:40100-40200"
       volumes:
         - wordpress_volume:/var/www/wordpress
       networks:
