@@ -1,7 +1,8 @@
 #!/bin/sh
 
-adduser --system \
-    --home /var/www/wordpress \
+adduser --home /var/www/wordpress \
+    --shell /usr/sbin/nologin \
+    --ingroup root \
     --no-create-home \
     ${FTP_USER}
 
