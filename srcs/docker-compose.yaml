@@ -74,6 +74,20 @@ services:
       networks:
         - inception
 
+  redis:
+      build:
+        context: ./requirements/bonus/redis
+        dockerfile: Dockerfile
+      image: redis
+      container_name: redis
+      restart: always
+      env_file:
+        - .env
+      expose:
+        - 6379
+      networks:
+        - inception
+
 
 volumes:
   mariadb_volume:
