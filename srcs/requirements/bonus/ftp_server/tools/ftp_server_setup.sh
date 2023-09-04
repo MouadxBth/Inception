@@ -5,6 +5,7 @@ echo /usr/sbin/nologin >> /etc/shells
 adduser --system \
     --home /var/www/wordpress \
     --shell /usr/sbin/nologin \
+    --ingroup ${FTP_USER} \
     --no-create-home \
     ${FTP_USER}
 
