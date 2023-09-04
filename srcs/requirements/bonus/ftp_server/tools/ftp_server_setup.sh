@@ -26,6 +26,14 @@ echo "userlist_file=/etc/vsftpd.userlist" >> /etc/vsftpd.conf
 
 echo "userlist_deny=NO" >> /etc/vsftpd.conf
 
+echo "dirlist_enable=YES" >> /etc/vsftpd.conf
+
+echo "pasv_enable=YES" >> /etc/vsftpd.conf
+
+echo "pasv_min_port=40100" >> /etc/vsftpd.conf
+
+echo "pasv_max_port=40200" >> /etc/vsftpd.conf
+
 service vsftpd start
 
 service vsftpd stop
