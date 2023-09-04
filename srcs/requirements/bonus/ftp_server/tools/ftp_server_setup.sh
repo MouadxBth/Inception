@@ -2,13 +2,13 @@
 
 echo /usr/sbin/nologin >> /etc/shells
 
-chmod -R 755 /var/www && chmod -R 755 /var/www/wordpress 
-
 adduser --system \
     --home /var/www/wordpress \
     --shell /usr/sbin/nologin \
     --no-create-home \
     ${FTP_USER}
+
+chmod -R 755 /var/www && chmod -R 755 /var/www/wordpress 
 
 echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd 
 
@@ -38,11 +38,13 @@ echo "pasv_min_port=40100" >> /etc/vsftpd.conf
 
 echo "pasv_max_port=40200" >> /etc/vsftpd.conf
 
-echo -e "debug_enable=YES\n
-dual_log_enable=YES\n
-syslog_enable=YES\n
-log_ftp_protocol=YES\n
-xferlog_enable=YES\n" >> /etc/vsftpd.conf
+echo "debug_enable=YES" >> /etc/vsftpd.conf
+
+echo "dual_log_enable=YES" >> /etc/vsftpd.conf
+
+echo "syslog_enable=YES" >> /etc/vsftpd.conf
+echo "log_ftp_protocol=YES" >> /etc/vsftpd.conf 
+echo "xferlog_enable=YES" >> /etc/vsftpd.conf
 
 service vsftpd start
 
