@@ -59,7 +59,7 @@ services:
       build:
         context: ./requirements/bonus/ftp_server
         dockerfile: Dockerfile
-      image: ftp_server
+      image: ftp_server:${TAG}
       container_name: ftp_server
       restart: always
       env_file:
@@ -78,7 +78,7 @@ services:
       build:
         context: ./requirements/bonus/redis
         dockerfile: Dockerfile
-      image: redis
+      image: redis:${TAG}
       container_name: redis
       restart: always
       env_file:
@@ -94,7 +94,7 @@ services:
       build:
         context: ./requirements/bonus/adminer
         dockerfile: Dockerfile
-      image: adminer
+      image: adminer:${TAG}
       container_name: adminer
       restart: always
       env_file:
