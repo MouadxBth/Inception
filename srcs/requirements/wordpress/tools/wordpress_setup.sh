@@ -3,7 +3,8 @@
 apt install -y php${PHP_VERSION} \
     php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-mysql \
-    php${PHP_VERSION}-redis
+    php${PHP_VERSION}-redis \
+    net-tools
 
 apt autoremove && rm -rf /var/lib/apt/lists/*
 
