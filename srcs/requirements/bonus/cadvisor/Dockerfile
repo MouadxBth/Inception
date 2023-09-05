@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt update -y && \
     apt install -y wget && \
-    wget https://github.com/google/cadvisor/releases/download/v0.47.2/cadvisor && \
+    wget -O cadvisor https://github.com/google/cadvisor/releases/download/v0.47.2/cadvisor-v0.47.2-linux-amd64 && \
     chmod +x cadvisor
 
 CMD ["./cadvisor"]
