@@ -5,9 +5,7 @@ RUN apt update -y && \
     apt autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /etc/nginx/ssl /var/www/wordpress \
-    && chmod 755 /var/www/wordpress \
-    && chown -R www-data:www-data /var/www/wordpress
+RUN mkdir -p /etc/nginx/ssl 
 
 RUN openssl req -x509 -nodes \
     -out /etc/nginx/ssl/inception.crt \
