@@ -65,9 +65,9 @@ services:
       - inception
     healthcheck:
       test: netstat -an | grep 9000 > /dev/null; if [ 0 != $$? ]; then exit 1; fi;
-      start_period: 10s
+      start_period: 20s
       timeout: 10s
-      retries: 3
+      retries: 5
 
   ftp_server:
       build:
