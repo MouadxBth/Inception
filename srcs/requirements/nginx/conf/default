@@ -32,9 +32,10 @@ server {
 
         # Adminer
         location ~ ^/adminer(/.*$|$) {
-            fastcgi_index index.php;
-            include /etc/nginx/fastcgi_params;
-            fastcgi_param SCRIPT_FILENAME /var/www/html/index.php;
+            #fastcgi_index index.php;
+            include snippets/fastcgi-php.conf;
+            #include /etc/nginx/fastcgi_params;
+            #fastcgi_param SCRIPT_FILENAME /var/www/html/index.php;
             fastcgi_pass adminer:9000;
         }
 
