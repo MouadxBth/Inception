@@ -133,6 +133,22 @@ services:
         timeout: 10s
         retries: 5
 
+  static_page:
+      build:
+        context: ./requirements/bonus/static_page
+        dockerfile: Dockerfile
+      image: static_page:${TAG}
+      container_name: static_page
+      restart: always
+      env_file:
+        - .env
+      expose:
+        - 3000
+      ports:
+        - "3000:3000"
+      networks:
+        - inception
+
 volumes:
   mariadb_volume:
     name: mariadb_volume

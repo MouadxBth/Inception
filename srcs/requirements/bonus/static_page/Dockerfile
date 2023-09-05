@@ -1,16 +1,15 @@
 FROM debian:bullseye
 
-RUN apt update
-RUN apt install -y nginx
+RUN apt update -y && \
+    apt install -y nodejs npm && \
+    apt autoremove && rm -rf /var/lib/apt/lists/*
 
-RUn rm -rf /var/www/html/*
+RUN mkdir -p /var/www/node
 
-COPY conf/static_page_config /tmp/static_page_config
+COPY ./tools/* /var/www/node/
 
-RUN cat /tmp/static_page_config >> /etc/nginx/http.d/default.conf
+WORKDIR /var/www/node
 
-COPY conf/index.html /var/www/html/index.html
+RUN npm init -y && npm install express -y
 
-EXPOSE 80
-
-CMD [ "nginx", "-g", "daemon off;"]
+CMD ["node", "server.js"]
