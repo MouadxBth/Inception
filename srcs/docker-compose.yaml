@@ -149,6 +149,28 @@ services:
       networks:
         - inception
 
+  cadvisor:
+      build:
+        context: ./requirements/bonus/cadvisor
+        dockerfile: Dockerfile
+      image: cadvisor:${TAG}
+      container_name: cadvisor
+      restart: always
+      env_file:
+        - .env
+      expose:
+        - 8080
+      ports:
+        - "8080:8080"
+      networks:
+        - inception
+      volumes:
+        - /:/rootfs:ro
+        - /var/run:/var/run:ro 
+        - /sys:/sys:ro 
+        - /var/lib/docker/:/var/lib/docker:ro
+        - /dev/disk/:/dev/disk:ro
+
 volumes:
   mariadb_volume:
     name: mariadb_volume
