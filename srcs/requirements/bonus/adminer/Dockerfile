@@ -1,6 +1,7 @@
 FROM debian:bullseye
 
-RUN apt-get update
-RUN apt-get install -y openssl nginx
+RUN apt update -y
 
-CMD [ "echo", "NGINX Image has been enabled!"]
+COPY tools/adminer_setup.sh /
+
+CMD [ "bash", "adminer_setup.sh"]

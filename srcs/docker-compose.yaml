@@ -90,6 +90,21 @@ services:
       networks:
         - inception
 
+  adminer:
+      build:
+        context: ./requirements/bonus/adminer
+        dockerfile: Dockerfile
+      image: adminer
+      container_name: adminer
+      restart: always
+      env_file:
+        - .env
+      expose:
+        - 9000
+      ports:
+        - "9000:9000"
+      networks:
+        - inception
 
 volumes:
   mariadb_volume:
