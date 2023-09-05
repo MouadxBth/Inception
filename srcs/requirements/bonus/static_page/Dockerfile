@@ -6,7 +6,7 @@ RUN apt update -y && \
 
 RUN mkdir -p /var/www/node
 
-COPY ./tools/* /var/www/node/
+COPY ./tools /var/www/node/
 
 WORKDIR /var/www/node
 
