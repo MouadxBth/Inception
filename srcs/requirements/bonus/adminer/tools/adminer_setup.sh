@@ -8,7 +8,7 @@ mkdir -p /var/www/html
 
 curl https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -o /var/www/html/index.php
 
-adduser -u 82 -D -S -G www-data www-data
+adduser --system --uid 82 --disabled-login --no-create-home --ingroup www-data www-data
 
 COPY /conf/www.conf /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
 
