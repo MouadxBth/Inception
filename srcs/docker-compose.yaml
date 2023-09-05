@@ -104,8 +104,6 @@ services:
         - .env
       expose:
         - 6379
-      ports:
-        - "6379:6379"
       networks:
         - inception
       healthcheck:
