@@ -1,0 +1,47 @@
+body{
+	margin-top: 300px;
+	text-align: center;
+	font-family: 'Lobster', cursive;
+}
+
+h1 {
+	letter-spacing: 0.35em;
+	transition: 0.75s ease;
+}
+
+h1:hover {
+	transform: scale(0.9);
+}
+
+#firstColor {
+	margin-right: 20px;
+	border-radius: 10px;
+
+}
+
+#secondColor {
+	border-radius: 10px;
+	margin-left: 20px;
+}
+
+#colorOutput {
+	font-size: 25px;
+	margin-left: 300px;
+	margin-right: 300px;
+	padding: 10px;
+	color: white;
+	background-color: rgba(0,0,0,0.35);
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	transition: 0.25s linear;
+}
+
+#colorOutput:hover {
+	background-color: rgba(0,0,0,0.75);
+	transform: scale(1.1);
+	border-radius: 30px;
+}
+
+
+
