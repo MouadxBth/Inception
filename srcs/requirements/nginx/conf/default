@@ -31,7 +31,7 @@ server {
         }
 
         # Adminer
-        location ~ ^/adminer(/.*$|$) {
+        location /adminer {
             fastcgi_pass adminer:9000;
             fastcgi_index index.php;
             include fastcgi_params;
