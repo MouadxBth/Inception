@@ -1,12 +1,15 @@
 #!/bin/bash
 
-apt install -y curl \
+apt install -y wget \
     php${PHP_VERSION}-fpm \
-    php${PHP_VERSION}-mysql
+    php${PHP_VERSION}-mysql \
+    net-tools
+
+apt autoremove && rm -rf /var/lib/apt/lists/*
 
 mkdir -p /var/www/html
 
-curl https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -o /var/www/html/index.php
+wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O /var/www/html/index.php
 
 mv /conf /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
 
