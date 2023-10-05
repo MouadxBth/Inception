@@ -1,8 +1,8 @@
 FROM debian:bullseye
 
-RUN apt update -y && \
-    apt install -y nodejs npm && \
-    apt autoremove && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && \
+    apt-get install -y nodejs npm && \
+    apt-get autoremove && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/node
 

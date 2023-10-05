@@ -1,11 +1,11 @@
 #!/bin/bash
 
-apt install -y wget \
+apt-get install -y wget \
     php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-mysql \
-    net-tools
-
-apt autoremove && rm -rf /var/lib/apt/lists/*
+    net-tools && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/*
 
 mkdir -p /var/www/html
 

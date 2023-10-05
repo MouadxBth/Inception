@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/09/01 14:58:10 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/09/17 12:50:48 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,11 @@ name = inception
 
 all: create_directories
 	@echo "Building and running docker images...\n"
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) up -d --build
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) up --detach --build
+
+logs:
+	@echo "Docker compose logs:"
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) logs
 
 clean: down
 	@echo "Deleting docker containers...\n"
@@ -26,7 +30,7 @@ clean: down
 
 fclean: delete_directories
 	@echo "Deleting containers, images, networks and volumes...\n"
-	@$(COMPOSE_CMD) $(COMPOSE_FILE) down --rmi all -v
+	@$(COMPOSE_CMD) $(COMPOSE_FILE) down --rmi all --volumes
 
 create_directories:
 	@echo "Creating data directories..."

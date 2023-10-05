@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
-RUN apt update -y && \
-    apt install -y curl \
+RUN apt-get update -y && \
+    apt-get install -y curl \
     mariadb-client
 
 COPY tools/wordpress_setup.sh /

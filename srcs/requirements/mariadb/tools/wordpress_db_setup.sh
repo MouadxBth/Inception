@@ -2,26 +2,26 @@
 
 /etc/init.d/mariadb start
 
-mysql_secure_installation << _EOF_
-$MARIADB_ROOT_PASSWORD
-n
-n
-y
-n
-y
-y
-_EOF_
+mysqladmin -u root password "$MARIADB_ROOT_PASSWORD"
 
-# Create SQL script
 cat << _EOF_ > /tmp/db.sql
+DELETE FROM mysql.user WHERE User='';
+DROP DATABASE IF EXISTS test;
+DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 CREATE DATABASE IF NOT EXISTS ${WORDPRESS_DB_NAME};
 CREATE USER IF NOT EXISTS '${WORDPRESS_DB_USER}'@'%' IDENTIFIED BY '${WORDPRESS_DB_USER_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${WORDPRESS_DB_NAME}.* TO '${WORDPRESS_DB_USER}'@'%';
 FLUSH PRIVILEGES;
 _EOF_
 
-mariadb < /tmp/db.sql
+echo "FIRST:"
+mariadb -u root -p"$MARIADB_ROOT_PASSWORD" < /tmp/db.sql
 
-mysqladmin -u root -p$MARIADB_ROOT_PASSWORD shutdown
+sleep 3
 
-exec mysqld_safe
+#DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+
+echo "THIRD:"
+mysqladmin -u root -p"$MARIADB_ROOT_PASSWORD" shutdown
+
+exec mysqld

@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt update -y
+RUN apt-get update -y
 
 COPY /conf/www.conf /conf
 
