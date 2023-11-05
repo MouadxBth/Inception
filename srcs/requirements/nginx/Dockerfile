@@ -11,11 +11,11 @@ RUN mkdir -p /etc/nginx/ssl
 #
 # openssl req: Initiates a request to create an X.509 certificate.
 #
-# -x509: Specifies that a self-signed certificate should be generated.
-# -nodes: Avoids encrypting the private key with a passphrase.
-# -out /etc/nginx/ssl/inception.crt: Specifies the output file for the certificate.
-# -keyout /etc/nginx/ssl/inception.key: Specifies the output file for the private key.
-# -subj: Sets the certificate's subject fields such as country (C), state (ST), locality (L),
+# - x509: Specifies that a self-signed certificate should be generated.
+# - nodes: Avoids encrypting the private key with a passphrase.
+# - out: /etc/nginx/ssl/inception.crt: Specifies the output file for the certificate.
+# - keyout: /etc/nginx/ssl/inception.key: Specifies the output file for the private key.
+# - subj: Sets the certificate's subject fields such as country (C), state (ST), locality (L),
 # organization (O), organizational unit (OU), common name (CN), and user ID (UID).
 #
 # These fields are used to identify the certificate.

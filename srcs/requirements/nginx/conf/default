@@ -4,6 +4,7 @@ server {
         # SSL configuration
         #
         listen 443 ssl;
+        # IPv6 address notation [::]
         listen [::]:443 ssl;
 
         ssl_protocols TLSv1.2 TLSv1.3;
@@ -31,17 +32,24 @@ server {
 
         # pass the PHP scripts to FastCGI server listening on wordpress:9000
         #
+        # the tilde is specifying that the match should be case sensitive
         location ~ \.php$ {
+            # Specifying a fastcgi-php config to be used
             include snippets/fastcgi-php.conf;
             fastcgi_pass wordpress:9000;
         }
 
         # Adminer
         location ~ ^/adminer(/.*$|$) {
-            fastcgi_index index.php;
+            # Including the default FastCGI settings
             include /etc/nginx/fastcgi_params;
-            fastcgi_param SCRIPT_FILENAME /var/www/html/index.php;
+            # Specifying the default index file to look for when a directory is accessed
+            fastcgi_index index.php;
             fastcgi_pass adminer:9000;
+            # Setting the SCRIPT_FILENAME FastCGI parameter to the given value, specifying
+            # the path to the PHP script file that should be executed by the FastCGI server
+            # to process the request
+            fastcgi_param SCRIPT_FILENAME /var/www/html/index.php;
         }
 
         # deny access to .htaccess files, if Apache's document root

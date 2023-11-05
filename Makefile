@@ -6,12 +6,12 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/15 10:41:46 by mbouthai          #+#    #+#              #
-#    Updated: 2023/09/17 12:50:48 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/11/05 18:29:11 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COMPOSE_FILE := ./srcs/docker-compose.yaml
 COMPOSE_CMD := docker compose -f
+COMPOSE_FILE := ./srcs/docker-compose.yaml
 HOME_DATA_DIR	:= /home/mbouthai/data
 
 name = inception

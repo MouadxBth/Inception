@@ -56,30 +56,75 @@ chmod -R 755 /var/www && chmod -R 755 /var/www/wordpress
 # over the WordPress directory.
 chown -R ${FTP_USER}:${FTP_USER}  /var/www/wordpress 
 
-echo ${FTP_USER} >> /etc/vsftpd.userlist 
-
-echo "write_enable=YES" >> /etc/vsftpd.conf 
-
-echo "chroot_local_user=YES" >> /etc/vsftpd.conf 
-
-echo "allow_writeable_chroot=YES" >> /etc/vsftpd.conf 
-
+## Adding userlist_enable=YES to /etc/vsftpd.conf
+#
+# Used to enable userlist support, which allows specifying user access rules in the 
+# "/etc/vsftpd.userlist" file
 echo "userlist_enable=YES" >> /etc/vsftpd.conf 
 
+## Adding userlist_file=/etc/vsftpd.userlist to /etc/vsftpd.conf
+#
+# Used to specify the location of the userlist file
 echo "userlist_file=/etc/vsftpd.userlist" >> /etc/vsftpd.conf 
+
+## Adding the "FTP_USER" to /etc/vsftpd.userlist
+#
+# Used to grant FTP_USER access to the FTP server
+echo ${FTP_USER} >> /etc/vsftpd.userlist 
+
+## Adding write_enable=YES to /etc/vsftpd.conf
+#
+# Used to allow write/upload access to the FTP users
+echo "write_enable=YES" >> /etc/vsftpd.conf 
+
+## Adding chroot_local_user=YES to /etc/vsftpd.conf
+#
+# Used to restrict FTP users to their home directories upon login (for security reasons)
+echo "chroot_local_user=YES" >> /etc/vsftpd.conf 
+
+## Adding allow_writeable_chroot=YES to /etc/vsftpd.conf
+#
+# Used to allow chrooted users (users restricted to their home directories) to write files and
+# create directories within their home directories
+echo "allow_writeable_chroot=YES" >> /etc/vsftpd.conf 
 
 echo "userlist_deny=NO" >> /etc/vsftpd.conf
 
+## Adding dirlist_enable=YES to /etc/vsftpd.conf
+#
+# Used to allow FTP users to see the contents of directories when they are connected to the
+# FTP server
 echo "dirlist_enable=YES" >> /etc/vsftpd.conf
 
+## Adding pasv_enable=YES to /etc/vsftpd.conf
+#
+# Used to enable passive mode for data connections, FTP can operate in 2 different
+# modes: Active mode and Passive mode
+#
+# Active mode allows the user to control both, the control connection (used for commands and
+# responses), and the data connection (used for actual file transfers).
+#
+# Passive mode makes the server setup the data connection, providing an available port and an
+# ip address (usually different from it's own) where the client can connect and receive data.
+#
+# Passive mode is often used when the FTP server is behind a firewall or network address 
+# translation (NAT, which is also our case) device because it allows clients to establish 
+# data connections to the server, without having to manually open a port for data connections
 echo "pasv_enable=YES" >> /etc/vsftpd.conf
 
+## Adding pasv_min_port=40100 to /etc/vsftpd.conf
+#
+# Used to specify the minimum port range for data connections
 echo "pasv_min_port=40100" >> /etc/vsftpd.conf
 
+## Adding pasv_max_port=40200 to /etc/vsftpd.conf
+#
+# Used to specify the maximum port range for data connections
 echo "pasv_max_port=40200" >> /etc/vsftpd.conf
 
-service vsftpd start
+# service vsftpd start
 
-service vsftpd stop
+# service vsftpd stop
 
+## Starting the FTP server with the given configuration
 exec "/usr/sbin/vsftpd" "/etc/vsftpd.conf"
