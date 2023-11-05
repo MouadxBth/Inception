@@ -173,11 +173,20 @@ services:
 
 volumes:
   mariadb_volume:
+    # Specifying a custom volume name
     name: mariadb_volume
+    # Specifying that the volume will be created on the local file system of the host machine
+    # other options include: nfs, s3, azure..., each driver has driver specific options
     driver: local
+    # Specifying driver specific options
     driver_opts:
+      # Specifying the path on the host machine where the volume will be created
       device: /home/mbouthai/data/mariadb
-      type: none
+      # Specifiying the type of the volume, in this case it's set to "none" indicating
+      # it's a basic local volume without any special storage type
+      type: local
+      # Specifying "options" to "bind" enabling bind propagation mode, which allow for
+      # bi-directional changes to be reflected on each side
       o: bind
       
   wordpress_volume:
@@ -185,10 +194,16 @@ volumes:
     driver: local
     driver_opts:
       device: /home/mbouthai/data/wordpress
-      type: none
+      type: local
       o: bind
+
 
 networks:
   inception:
+    # Specifying a name for the network
     name: inception
+    # Specifying a network driver for the network, with the bridge dirver, Docker creates a 
+    # private internal network on the host , allowing containers to be able to communicate 
+    # with each other, while also having access to the external network through 
+    # NAT (Network Address Translation)
     driver: bridge
